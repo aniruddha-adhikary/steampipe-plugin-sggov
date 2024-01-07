@@ -1,8 +1,8 @@
-package steampipe-plugin-singstat
+package main
 
 import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"github.com/your_github_username/steampipe-plugin-singstat/singstat"
+	"steampipe-plugin-singstat/singstat"
 )
 
 func main() {
