@@ -35,7 +35,10 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 	// Retrieve the keyword and searchOption from the query qualifiers
 	quals := d.EqualsQuals
 	keyword := quals["keyword"].GetStringValue()
-	searchOption := quals["searchOption"].GetStringValue()
+	searchOption := "all"
+	if quals["searchOption"] != nil {
+		searchOption = quals["searchOption"].GetStringValue()
+	}
 
 	// Build the URL for the API request
 	url := "https://tablebuilder.singstat.gov.sg/api/table/resourceid?keyword=" + keyword + "&searchOption=" + searchOption
