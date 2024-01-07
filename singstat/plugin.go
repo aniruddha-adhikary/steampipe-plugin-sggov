@@ -35,7 +35,7 @@ func tableSingStat(ctx context.Context) *plugin.Table {
 
 func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
 	// Retrieve the keyword and searchOption from the query qualifiers
-	quals := d.KeyColumnQuals
+	quals := d.EqualsQuals
 	keyword := quals["keyword"].GetStringValue()
 	searchOption := quals["searchOption"].GetStringValue()
 
