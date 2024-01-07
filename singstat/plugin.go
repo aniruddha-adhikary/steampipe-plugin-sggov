@@ -55,6 +55,12 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 		plugin.Logger(ctx).Error("listSingStatTables", "request_creation_error", err)
 		return nil, err
 	}
+	if err != nil {
+		plugin.Logger(ctx).Error("listSingStatTables", "request_creation_error", err)
+		return nil, err
+	}
+	// Explicitly accept JSON in UTF-8 encoding
+	req.Header.Set("Accept", "application/json; charset=utf-8")
 
 	resp, err := client.Do(req)
 	if err != nil {
