@@ -59,3 +59,140 @@ paths:
                     type: integer
                   Message:
                     type: string
+  /metadata/{resourceId}:
+    get:
+      summary: Retrieve Metadata
+      description: Retrieve metadata for a given resource ID.
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+          description: The ID of the resource.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Data:
+                    anyOf:
+                      - $ref: '#/components/schemas/TimeSeriesVariant'
+                      - $ref: '#/components/schemas/CrossSectionalVariant'
+                  DataCount:
+                    type: integer
+                  StatusCode:
+                    type: integer
+                  Message:
+                    type: string
+
+components:
+  schemas:
+    TimeSeriesVariant:
+      type: object
+      properties:
+        generatedBy:
+          type: string
+        dateGenerated:
+          type: string
+        records:
+          $ref: '#/components/schemas/TimeSeriesRecords'
+
+    CrossSectionalVariant:
+      type: object
+      properties:
+        generatedBy:
+          type: string
+        dateGenerated:
+          type: string
+        records:
+          $ref: '#/components/schemas/CrossSectionalRecords'
+
+    TimeSeriesRecords:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        frequency:
+          type: string
+        dataSource:
+          type: string
+        footnote:
+          type: string
+        dataLastUpdated:
+          type: string
+        startPeriod:
+          type: string
+        endPeriod:
+          type: string
+        total:
+          type: integer
+        row:
+          type: array
+          items:
+            $ref: '#/components/schemas/SeriesRow'
+
+    CrossSectionalRecords:
+      type: object
+      properties:
+        id:
+          type: string
+        tableType:
+          type: string
+        title:
+          type: string
+        frequency:
+          type: string
+        dataSource:
+          type: string
+        footnote:
+          type: string
+        dataLastUpdated:
+          type: string
+        column1:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnDetail'
+        row:
+          type: array
+          items:
+            $ref: '#/components/schemas/RowDetail'
+
+    SeriesRow:
+      type: object
+      properties:
+        seriesNo:
+          type: string
+        rowText:
+          type: string
+        uom:
+          type: string
+        footnote:
+          type: string
+
+    ColumnDetail:
+      type: object
+      properties:
+        columnNo:
+          type: string
+        columnText:
+          type: string
+        footNote:
+          type: string
+
+    RowDetail:
+      type: object
+      properties:
+        rowNo:
+          type: string
+        rowText:
+          type: string
+        uom:
+          type: string
+        footnote:
+          type: string
