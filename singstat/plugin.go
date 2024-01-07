@@ -108,7 +108,13 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 
 	// Stream the data from the response
 	for _, record := range responseData.Data.Records {
-		d.StreamListItem(ctx, record)
+		d.StreamListItem(ctx, map[string]interface{}{
+			"id":           record.ID,
+			"table_type":   record.TableType,
+			"title":        record.Title,
+			"keyword":      keyword,
+			"searchOption": searchOption,
+		})
 	}
 
 	return nil, nil
