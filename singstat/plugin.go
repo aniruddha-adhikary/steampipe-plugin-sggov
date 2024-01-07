@@ -67,6 +67,8 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 		plugin.Logger(ctx).Error("listSingStatTables", "request_execution_error", err)
 		return nil, err
 	}
+	// Log the HTTP response status
+	plugin.Logger(ctx).Warn("listSingStatTables", "response_status", resp.Status)
 	defer resp.Body.Close()
 
 	// Parse the response body into the appropriate structure
