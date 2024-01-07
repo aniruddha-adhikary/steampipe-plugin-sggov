@@ -3,7 +3,9 @@ package singstat
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
@@ -23,7 +25,7 @@ func tableSingStat(ctx context.Context) *plugin.Table {
 		Name:        "singstat",
 		Description: "Search for statistical tables in the SingStat Table Builder.",
 		List: &plugin.ListConfig{
-			Hydrate:           listSingStatTables,
+			Hydrate: listSingStatTables,
 			KeyColumns: plugin.KeyColumnSlice{
 				{Name: "keyword", Require: plugin.Required, Operators: []string{"="}},
 				{Name: "searchOption", Require: plugin.Required, Operators: []string{"="}},
@@ -81,6 +83,7 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 
 	// Log the HTTP response status and body
 	plugin.Logger(ctx).Warn("listSingStatTables", "response_status", resp.Status, "response_body", bodyString)
+	fmt.Println(bodyString)
 
 	// Parse the response body into the appropriate structure
 	var responseData struct {
@@ -110,4 +113,3 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 
 	return nil, nil
 }
-
