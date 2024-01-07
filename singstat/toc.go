@@ -17,7 +17,7 @@ func tableSingStat(ctx context.Context) *plugin.Table {
 		List: &plugin.ListConfig{
 			Hydrate: listSingStatTables,
 			KeyColumns: plugin.KeyColumnSlice{
-				{Name: "keyword", Require: plugin.Optional, Operators: []string{"="}},
+				{Name: "keyword", Require: plugin.Required, Operators: []string{"="}},
 				{Name: "searchOption", Require: plugin.Optional, Operators: []string{"="}},
 			},
 		},
