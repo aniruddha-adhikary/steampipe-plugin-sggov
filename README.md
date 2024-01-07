@@ -18,15 +18,14 @@ have [Steampipe installed and working](https://steampipe.io/downloads)!
     cd steampipe-plugin-singstat
     ```
 
-2. Build the plugin from source.
+2. Build and install the plugin using the Makefile.
     ```shell
-    go build -o steampipe-plugin-singstat.plugin -tags netgo *.go
+    make install
     ```
 
-3. Install it.
+3. Verify the installation.
     ```shell
-    mkdir -p ~/.steampipe/plugins/local/singstat
-    cp steampipe-plugin-singstat.plugin ~/.steampipe/plugins/local/singstat
+    steampipe plugin list
     ```
 
 4. Run Steampipe.
