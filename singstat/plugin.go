@@ -93,8 +93,8 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 			Total         int    `json:"total"`
 			Records       []struct {
 				ID        string `json:"id"`
-				TableType string `json:"tableType"`
 				Title     string `json:"title"`
+				TableType string `json:"tableType"`
 			} `json:"records"`
 		} `json:"Data"`
 		DataCount  int    `json:"DataCount"`
