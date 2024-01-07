@@ -33,8 +33,8 @@ func tableSingStat(ctx context.Context) *plugin.Table {
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "The ID of the statistical table."},
 			{Name: "table_type", Type: proto.ColumnType_STRING, Description: "The type of the statistical table."},
 			{Name: "title", Type: proto.ColumnType_STRING, Description: "The title of the statistical table."},
-			{Name: "keyword", Type: proto.ColumnType_STRING, Transform: plugin.TransformFromQual("keyword"), Description: "Search query to find relevant statistical tables."},
-			{Name: "searchOption", Type: proto.ColumnType_STRING, Transform: plugin.TransformFromQual("searchOption"), Description: "Option to include “all”, “title”, or “variable” in the search."},
+			{Name: "keyword", Type: proto.ColumnType_STRING, Description: "Search query to find relevant statistical tables."},
+			{Name: "searchOption", Type: proto.ColumnType_STRING, Description: "Option to include “all”, “title”, or “variable” in the search."},
 		},
 	}
 }
