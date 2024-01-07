@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: SingStat Table Builder API
+  version: 1.0.0
+  description: API for accessing statistical tables based on keywords and search options.
+servers:
+  - url: https://tablebuilder.singstat.gov.sg/api/table
+
+paths:
+  /resourceid:
+    get:
+      summary: Retrieve statistical table information
+      description: >
+        This endpoint retrieves statistical table information based on a provided keyword and search option.
+      parameters:
+        - in: query
+          name: keyword
+          required: true
+          schema:
+            type: string
+          description: Search query to find relevant statistical tables.
+        - in: query
+          name: searchOption
+          required: true
+          schema:
+            type: string
+          description: Option to include “all”, “title”, or “variable” in the search.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Data:
+                    type: object
+                    properties:
+                      generatedBy:
+                        type: string
+                      dateGenerated:
+                        type: string
+                      total:
+                        type: integer
+                      records:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            tableType:
+                              type: string
+                            title:
+                              type: string
+                  DataCount:
+                    type: integer
+                  StatusCode:
+                    type: integer
+                  Message:
+                    type: string
