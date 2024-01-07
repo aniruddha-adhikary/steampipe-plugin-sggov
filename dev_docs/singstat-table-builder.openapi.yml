@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: SingStat Table Builder API
   version: 1.0.0
-  description: API for accessing statistical tables based on keywords and search options.
+  description: API for accessing statistical tables, metadata, and table data based on various parameters.
 servers:
   - url: https://tablebuilder.singstat.gov.sg/api/table
 
@@ -82,6 +82,71 @@ paths:
                     anyOf:
                       - $ref: '#/components/schemas/TimeSeriesVariant'
                       - $ref: '#/components/schemas/CrossSectionalVariant'
+                  DataCount:
+                    type: integer
+                  StatusCode:
+                    type: integer
+                  Message:
+                    type: string
+  /tabledata/{resourceId}:
+    get:
+      summary: Retrieve Table Data
+      description: Retrieve data from tables based on various filters and sorting options.
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+          description: The ID of the resource.
+        - in: query
+          name: seriesNoORrowNo
+          required: true
+          schema:
+            type: string
+          description: seriesNo for Time Series Table and rowNo for Cross Sectional Table.
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: Specify the first n number of records to be excluded in the returned result.
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Specify the number of records to be included in the returned results.
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+          description: Sort the returned records in a specified order.
+        - in: query
+          name: timeFilter
+          schema:
+            type: string
+          description: Return records of specific time points based on the type of selected table.
+        - in: query
+          name: between
+          schema:
+            type: string
+          description: Specify a range within which the data values are to be filtered.
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Return records that contain the search string.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Data:
+                    anyOf:
+                      - $ref: '#/components/schemas/TimeSeriesData'
+                      - $ref: '#/components/schemas/CrossSectionalData'
                   DataCount:
                     type: integer
                   StatusCode:
@@ -196,3 +261,72 @@ components:
           type: string
         footnote:
           type: string
+    TimeSeriesData:
+      type: object
+      properties:
+        # ... [TimeSeries data properties here]
+        row:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSeriesRow'
+
+    CrossSectionalData:
+      type: object
+      properties:
+        # ... [CrossSectional data properties here]
+        row:
+          type: array
+          items:
+            $ref: '#/components/schemas/CrossSectionalRow'
+
+    TimeSeriesRow:
+      type: object
+      properties:
+        seriesNo:
+          type: string
+        rowText:
+          type: string
+        uom:
+          type: string
+        footnote:
+          type: string
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnValue'
+
+    CrossSectionalRow:
+      type: object
+      properties:
+        rowNo:
+          type: string
+        rowText:
+          type: string
+        uom:
+          type: string
+        footnote:
+          type: string
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnValueOrNested'
+
+    ColumnValue:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+
+    ColumnValueOrNested:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnValue'
