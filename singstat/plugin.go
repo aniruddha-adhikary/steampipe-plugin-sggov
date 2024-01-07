@@ -58,8 +58,21 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 	defer resp.Body.Close()
 
 	// Parse the response body into the appropriate structure
-	// (This will require defining a struct to match the JSON response)
-	var responseData SingStatResponse
+	var responseData struct {
+		Data struct {
+			GeneratedBy   string `json:"generatedBy"`
+			DateGenerated string `json:"dateGenerated"`
+			Total         int    `json:"total"`
+			Records       []struct {
+				ID        string `json:"id"`
+				TableType string `json:"tableType"`
+				Title     string `json:"title"`
+			} `json:"records"`
+		} `json:"Data"`
+		DataCount  int    `json:"DataCount"`
+		StatusCode int    `json:"StatusCode"`
+		Message    string `json:"Message"`
+	}
 	if err := json.NewDecoder(resp.Body).Decode(&responseData); err != nil {
 		plugin.Logger(ctx).Error("listSingStatTables", "response_decode_error", err)
 		return nil, err
@@ -73,13 +86,3 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 	return nil, nil
 }
 
-// Define a struct to match the JSON response from the SingStat API
-type SingStatResponse struct {
-	Data struct {
-		Records []struct {
-			ID        string `json:"id"`
-			TableType string `json:"tableType"`
-			Title     string `json:"title"`
-		} `json:"records"`
-	} `json:"Data"`
-}
