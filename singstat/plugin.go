@@ -71,6 +71,17 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 	plugin.Logger(ctx).Warn("listSingStatTables", "response_status", resp.Status)
 	defer resp.Body.Close()
 
+	// Read the response body
+	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		plugin.Logger(ctx).Error("listSingStatTables", "response_read_error", err)
+		return nil, err
+	}
+	bodyString := string(bodyBytes)
+
+	// Log the HTTP response status and body
+	plugin.Logger(ctx).Warn("listSingStatTables", "response_status", resp.Status, "response_body", bodyString)
+
 	// Parse the response body into the appropriate structure
 	var responseData struct {
 		Data struct {
@@ -87,7 +98,7 @@ func listSingStatTables(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 		StatusCode int    `json:"StatusCode"`
 		Message    string `json:"Message"`
 	}
-	if err := json.NewDecoder(resp.Body).Decode(&responseData); err != nil {
+	if err := json.Unmarshal(bodyBytes, &responseData); err != nil {
 		plugin.Logger(ctx).Error("listSingStatTables", "response_decode_error", err)
 		return nil, err
 	}
