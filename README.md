@@ -23,17 +23,12 @@ have [Steampipe installed and working](https://steampipe.io/downloads)!
     make install
     ```
 
-3. Verify the installation.
-    ```shell
-    steampipe plugin list
-    ```
-
-4. Run Steampipe.
+3. Run Steampipe.
    ```shell
    steampipe query
    ```
 
-5. Run a query.
+4. Run a query.
    ```sql
    SELECT id, title
    FROM singstat
