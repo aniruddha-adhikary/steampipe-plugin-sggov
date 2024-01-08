@@ -2,7 +2,7 @@
 
 Use SQL to query data from [Singapore Department of Statistics](https://singstat.gov.sg) and [Data.gov.sg](https://data.gov.sg). Join your PostgreSQL Database with "live" Public Data, unlock capabilities!
 
-![Screenshot of SingStat for Steampipe in Action](./dev_docs/dream.png)
+![Screenshot of SingStat for Steampipe in Action](./dev_docs/dream2.png)
 
 > Note: This project is not officially endorsed or sanctioned by the Government of Singapore, Department of
 > Statistics or any government agency.
