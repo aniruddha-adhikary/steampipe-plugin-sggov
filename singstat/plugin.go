@@ -7,7 +7,7 @@ import (
 
 func Plugin(ctx context.Context) *plugin.Plugin {
 	return &plugin.Plugin{
-		Name: "steampipe-plugin-singstat",
+		Name: "steampipe-plugin-sggov",
 		TableMap: map[string]*plugin.Table{
 			"singstat": tableSingStat(ctx),
 		},

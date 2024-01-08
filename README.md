@@ -1,6 +1,6 @@
-# SingStat Plugin for Steampipe
+# SingStat Plugin for Singapore Government Public Data
 
-Use SQL to query data from [Singapore Department of Statistics](https://singstat.gov.sg).
+Use SQL to query data from [Singapore Department of Statistics](https://singstat.gov.sg) and [Data.gov.sg](https://data.gov.sg).
 
 ![Screenshot of SingStat for Steampipe in Action](./dev_docs/cover.png)
 
@@ -14,8 +14,8 @@ have [Steampipe installed and working](https://steampipe.io/downloads)!
 
 1. Clone the code.
     ```shell
-    git clone https://github.com/aniruddha-adhikary/steampipe-plugin-singstat.git
-    cd steampipe-plugin-singstat
+    git clone https://github.com/aniruddha-adhikary/steampipe-plugin-sggov.git
+    cd steampipe-plugin-sggov
     ```
 
 2. Build and install the plugin using the Makefile.
@@ -34,6 +34,13 @@ have [Steampipe installed and working](https://steampipe.io/downloads)!
    FROM singstat
    WHERE keyword = 'dialect' AND "searchOption" = 'title';
    ```
+
+## Feature Map
+
+| Feature        | Data.gov.sg | SingStat |
+|----------------|-------------|----------|
+| Dataset Lookup | ❌           | ✅        |
+| Data Fetching  | ❌           | ❌        |
 
 ## Developing
 

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
-	"steampipe-plugin-singstat/singstat"
+	"steampipe-plugin-sggov/singstat"
 )
 
 func main() {

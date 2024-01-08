@@ -1,4 +1,4 @@
-PLUGIN_NAME := steampipe-plugin-singstat
+PLUGIN_NAME := steampipe-plugin-sggov
 PLUGIN_DIR := ~/.steampipe/plugins/local/singstat
 
 build:

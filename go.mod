@@ -1,4 +1,4 @@
-module steampipe-plugin-singstat
+module steampipe-plugin-sggov
 
 go 1.21
 
